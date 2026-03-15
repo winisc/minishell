@@ -35,12 +35,30 @@ jobs:
         run: pip install norminette
 
       - name: Run norminette
+        shell: bash
         run: |
           echo "──────────────────────────────────────────"
           echo " Running norminette on src/ includes/ libs/"
           echo "──────────────────────────────────────────"
-          OUTPUT=$(norminette src/ includes/ libs/ 2>&1)
+
+          DIRS=""
+          for d in src includes libs; do
+            if [ -d "$d" ]; then
+              DIRS="$DIRS $d"
+            else
+              echo "⚠️  Directory '$d/' not found, skipping."
+            fi
+          done
+
+          if [ -z "$DIRS" ]; then
+            echo "❌ No target directories found. Check your project structure."
+            exit 1
+          fi
+
+          echo "📁 Scanning:$DIRS"
+          OUTPUT=$(norminette $DIRS 2>&1) || true
           echo "$OUTPUT"
+
           if echo "$OUTPUT" | grep -q "Error"; then
             echo ""
             echo "❌ Norminette found errors. Fix them before merging."
