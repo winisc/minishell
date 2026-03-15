@@ -37,9 +37,9 @@ jobs:
       - name: Run norminette
         run: |
           echo "──────────────────────────────────────────"
-          echo " Running norminette on src/ and includes/"
+          echo " Running norminette on src/ includes/ libs/"
           echo "──────────────────────────────────────────"
-          OUTPUT=$(norminette src/ includes/ 2>&1)
+          OUTPUT=$(norminette src/ includes/ libs/ 2>&1)
           echo "$OUTPUT"
           if echo "$OUTPUT" | grep -q "Error"; then
             echo ""
