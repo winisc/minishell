@@ -6,7 +6,7 @@
 #    By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 19:14:29 by wini              #+#    #+#              #
-#    Updated: 2026/03/15 18:37:11 by wsilveir         ###   ########.fr        #
+#    Updated: 2026/04/18 20:19:02 by wsilveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJ = $(SRC:.c=.o)
 LIBFT_A = $(LIBFT_DIR)/libft.a
 FT_PRINTF_A = $(FT_PRINTF_DIR)/libftprintf.a
 
-all: libft ft_printf $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_A) $(FT_PRINTF_A)
 	$(CC) $(CFLAGS) $(OBJ) $(INCLUDES) $(LIBFT_A) $(FT_PRINTF_A) -o $(NAME)
@@ -36,10 +36,10 @@ $(NAME): $(OBJ) $(LIBFT_A) $(FT_PRINTF_A)
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-libft:
+$(LIBFT_A):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-ft_printf:
+$(FT_PRINTF_A):
 	@$(MAKE) -C $(FT_PRINTF_DIR)
 
 clean:
@@ -54,4 +54,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft ft_printf
+.PHONY: all clean fclean re
