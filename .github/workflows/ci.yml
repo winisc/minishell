@@ -4,14 +4,14 @@ on:
   push:
     branches:
       - main
-      - dev
+      - development
       - 'feat/**'
       - 'fix/**'
       - 'task/**'
   pull_request:
     branches:
       - main
-      - dev
+      - development
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

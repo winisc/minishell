@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_pointer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 18:33:24 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/18 20:09:48 by wsilveir         ###   ########.fr       */
+/*   Created: 2025/07/26 18:45:30 by wsilveir          #+#    #+#             */
+/*   Updated: 2026/04/18 20:02:47 by wsilveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
+int	ft_putnbr_pointer(size_t nbr)
+{
+	char	*base;
+	int		res;
 
-#endif
+	base = "0123456789abcdef";
+	res = 0;
+	if (!nbr)
+		return (ft_putstr("(nil)"));
+	if (nbr >= 16)
+	{
+		res += ft_putnbr_pointer(nbr / 16);
+		res += ft_putnbr_pointer(nbr % 16);
+	}
+	else
+	{
+		res += ft_putstr("0x");
+		res += ft_putchar(base[nbr]);
+	}
+	return (res);
+}
