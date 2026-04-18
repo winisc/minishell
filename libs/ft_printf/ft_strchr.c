@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 18:33:24 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/18 20:09:48 by wsilveir         ###   ########.fr       */
+/*   Created: 2025/07/12 16:36:02 by wsilveir          #+#    #+#             */
+/*   Updated: 2025/07/26 20:43:41 by wsilveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include "libft.h"
-# include "ft_printf.h"
+char	*ft_strchr(const char *s, int c)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char) c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (s[i] == (char) c)
+		return ((char *)s + i);
+	return (NULL);
+}
