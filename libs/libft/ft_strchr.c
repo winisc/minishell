@@ -6,11 +6,11 @@
 /*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 16:36:02 by wsilveir          #+#    #+#             */
-/*   Updated: 2025/08/16 23:04:39 by wsilveir         ###   ########.fr       */
+/*   Updated: 2025/07/26 20:43:41 by wsilveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 char	*ft_strchr(const char *s, int c)
 {

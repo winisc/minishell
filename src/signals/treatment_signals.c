@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   treatment_signals.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 18:33:24 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/22 13:24:14 by wini             ###   ########.fr       */
+/*   Created: 2026/04/22 13:12:49 by wini              #+#    #+#             */
+/*   Updated: 2026/04/22 13:18:35 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
-# include "ft_printf.h"
-
-
-# define EXIT_REQUESTED 1
-# define CONTINUE_SHELL 0
+#include "minishell.h"
+/* Trata o sinal SIGINT (Ctrl+C) */
+static void	handle_sigint(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
 /* Inicializa os handlers de sinais */
-void	init_signals(void);
-/* Processa entrada do usuário: lexer → parser → execution */
-int		process_input(char *input);
-
-#endif
+void	init_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+}
