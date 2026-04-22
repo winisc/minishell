@@ -22,7 +22,7 @@ jobs:
   # 1. NORMINETTE
   # ─────────────────────────────────────────────
   norminette:
-    name: 🔍 Norminette
+    name: Norminette
     runs-on: ubuntu-latest
     container:
       image: python:3.11-slim
@@ -70,7 +70,7 @@ jobs:
   # 2. BUILD
   # ─────────────────────────────────────────────
   build:
-    name: 🔨 Build
+    name: Build
     runs-on: ubuntu-latest
     needs: norminette
 
