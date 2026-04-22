@@ -6,7 +6,7 @@
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:25:03 by wini              #+#    #+#             */
-/*   Updated: 2026/04/22 13:27:47 by wini             ###   ########.fr       */
+/*   Updated: 2026/04/22 13:31:03 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@
 
 int	process_input(char *input)
 {
+	(void)input;
 	return (CONTINUE_SHELL);
 }
