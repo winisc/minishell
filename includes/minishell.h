@@ -6,7 +6,7 @@
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 18:33:24 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/22 13:28:02 by wini             ###   ########.fr       */
+/*   Updated: 2026/04/23 19:19:31 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
-# include "ft_printf.h"
 
 # define EXIT_REQUESTED 1
 # define CONTINUE_SHELL 0

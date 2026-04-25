@@ -1,19 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 12:38:33 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
+/*   Created: 2026/04/23 19:27:31 by wini              #+#    #+#             */
+/*   Updated: 2026/04/23 19:34:06 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_putchar(char c)
+void token_new()
 {
-	write(1, &c, 1);
-	return (1);
+    
+}
+
+void token_add_back()
+{
+
+}
+
+void free_tokens()
+{
+    
+}
+
+void read_word()
+{
+    
+}
+
+void read_operator()
+{
+    
+}
+
+void read_redirection()
+{
+    
+}
+
+void is_operator()
+{
+    
+}
+
+void is_whitespace()
+{
+    
+}
+
+void is_quote()
+{
+    
+}
+
+void get_token_type()
+{
+
+}
+
+
+void lexer()
+{
+    read_word();
+    read_operator();
+    token_new();
+    token_add_back();
 }

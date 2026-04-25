@@ -1,19 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 12:38:33 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
+/*   Created: 2026/04/23 19:04:29 by wini              #+#    #+#             */
+/*   Updated: 2026/04/23 19:19:23 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LEXER_H
+# define LEXER_H
 
-int	ft_putchar(char c)
+# include "minishell.h"
+/*
+** Tipos de tokens reconhecidos pelo lexer
+*/
+typedef enum e_token_type
 {
-	write(1, &c, 1);
-	return (1);
-}
+	T_WORD,
+	T_PIPE,
+	T_REDIR_IN,
+	T_REDIR_OUT,
+	T_APPEND,
+	T_HEREDOC
+}	t_token_type;
+
+/*
+** Estrutura de token (lista encadeada)
+*/
+typedef struct s_token
+{
+	t_token_type		type;
+	char				*value;
+	struct s_token		*next;
+}	t_token;
+
+#endif
