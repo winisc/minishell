@@ -6,10 +6,13 @@
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 19:27:31 by wini              #+#    #+#             */
-/*   Updated: 2026/04/23 19:34:06 by wini             ###   ########.fr       */
+/*   Updated: 2026/04/25 17:14:54 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+/*
 void token_new()
 {
     
@@ -59,12 +62,8 @@ void get_token_type()
 {
 
 }
-
-
-void lexer()
+*/
+void	lexer(char *input)
 {
-    read_word();
-    read_operator();
-    token_new();
-    token_add_back();
+	ft_printf("%s\n", input);
 }

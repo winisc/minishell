@@ -6,7 +6,7 @@
 #    By: wini <wini@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 19:14:29 by wini              #+#    #+#              #
-#    Updated: 2026/04/22 13:23:26 by wini             ###   ########.fr        #
+#    Updated: 2026/04/25 17:13:32 by wini             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ INCLUDES = -Iincludes -I$(LIBFT_DIR)
 
 SRC = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/process_input.c \
-		$(SRC_DIR)/signals/treatment_signals.c
+		$(SRC_DIR)/signals/treatment_signals.c \
+		$(SRC_DIR)/lexer/lexer.c
 
 OBJ = $(SRC:.c=.o)
 
