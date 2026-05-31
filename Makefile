@@ -24,6 +24,8 @@ INCLUDES = -Iincludes -I$(LIBFT_DIR)
 SRC = $(SRC_DIR)/main.c \
 		$(SRC_DIR)/process_input.c \
 		$(SRC_DIR)/signals/treatment_signals.c \
+		$(SRC_DIR)/lexer/token.c \
+		$(SRC_DIR)/lexer/lexer_utils.c \
 		$(SRC_DIR)/lexer/lexer.c
 
 OBJ = $(SRC:.c=.o)

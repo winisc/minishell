@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/15 18:33:24 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/25 17:14:25 by wini             ###   ########.fr       */
+/*   Created: 2026/05/31 00:00:00 by wini              #+#    #+#             */
+/*   Updated: 2026/05/31 00:00:00 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft.h"
+int	is_whitespace(char c)
+{
+	return (c == ' ' || c == '\t');
+}
 
-# define EXIT_REQUESTED 1
-# define CONTINUE_SHELL 0
+int	is_operator(char c)
+{
+	return (c == '|' || c == '<' || c == '>');
+}
 
-void	init_signals(void);
-int		process_input(char *input);
-#endif
+int	is_quote(char c)
+{
+	return (c == '\'' || c == '"');
+}

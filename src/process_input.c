@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 /* Processa entrada do usuário através do pipeline completo */
 
@@ -33,6 +33,9 @@
 
 int	process_input(char *input)
 {
-	lexer(input);
+	t_token	*tokens;
+
+	tokens = lexer(input);
+	free_tokens(tokens);
 	return (CONTINUE_SHELL);
 }

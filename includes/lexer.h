@@ -37,4 +37,14 @@ typedef struct s_token
 	struct s_token		*next;
 }	t_token;
 
+t_token	*token_new(t_token_type type, char *value);
+void	token_add_back(t_token **head, t_token *new);
+void	free_tokens(t_token *head);
+
+int		is_whitespace(char c);
+int		is_operator(char c);
+int		is_quote(char c);
+
+t_token	*lexer(char *input);
+
 #endif
