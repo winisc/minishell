@@ -1,7 +1,5 @@
 *This project was created as part of the 42 curriculum by wsilveir, <login2>.*
 
-> **Nota:** substitua `<login2>` pelo(s) login(s) do(s) parceiro(s) do grupo.
-
 ## Description
 
 **minishell** is a minimal Unix shell written in C, inspired by `bash`. It reads
