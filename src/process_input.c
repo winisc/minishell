@@ -6,36 +6,31 @@
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:25:03 by wini              #+#    #+#             */
-/*   Updated: 2026/04/23 19:34:19 by wini             ###   ########.fr       */
+/*   Updated: 2026/06/09 00:00:00 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "expansion.h"
+#include "execution.h"
 
-/* Processa entrada do usuário através do pipeline completo */
-
-/* TODO: Lexer - Tokenizar entrada */
-/* t_token *tokens = lexer(input); */
-
-/* TODO: Parser - Construir AST */
-/* t_ast *ast = parser(tokens); */
-
-/* TODO: Executor - Executar comandos */
-/* execute(ast); */
-
-/* TODO: Liberar recursos */
-/* free_tokens(tokens); */
-/* free_ast(ast); */
-
-/* TODO: Detectar comando "exit" */
-/* if (check_exit_command(input)) */
-/*     return (EXIT_REQUESTED); */
-
-int	process_input(char *input)
+int	process_input(char *input, t_shell *shell)
 {
 	t_token	*tokens;
+	t_cmd	*cmds;
 
+	if (has_unclosed_quotes(input))
+	{
+		ft_putstr_fd("minishell: syntax error: unclosed quote\n", 2);
+		shell->last_status = 2;
+		return (CONTINUE_SHELL);
+	}
 	tokens = lexer(input);
+	cmds = parser(tokens, shell);
 	free_tokens(tokens);
+	if (cmds && expand_args(cmds, shell))
+		execute(cmds, shell);
+	cmd_clear(cmds);
+	if (shell->exit_flag)
+		return (EXIT_REQUESTED);
 	return (CONTINUE_SHELL);
 }
