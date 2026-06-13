@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/31 00:00:00 by wini              #+#    #+#             */
-/*   Updated: 2026/05/31 00:00:00 by wini             ###   ########.fr       */
+/*   Created: 2026/06/09 00:00:00 by wini              #+#    #+#             */
+/*   Updated: 2026/06/09 00:00:00 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
-t_token	*token_new(t_token_type type, char *value)
+t_cmd	*cmd_new(int argc)
 {
-	t_token	*token;
+	t_cmd	*cmd;
 
-	if (!value)
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
 		return (NULL);
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->type = type;
-	token->value = ft_strdup(value);
-	if (!token->value)
+	cmd->argv = malloc(sizeof(char *) * (argc + 1));
+	if (!cmd->argv)
 	{
-		free(token);
+		free(cmd);
 		return (NULL);
 	}
-	token->next = NULL;
-	return (token);
+	ft_bzero(cmd->argv, sizeof(char *) * (argc + 1));
+	cmd->redirs = NULL;
+	cmd->next = NULL;
+	return (cmd);
 }
 
-void	token_add_back(t_token **head, t_token *new)
+void	cmd_add_back(t_cmd **head, t_cmd *new)
 {
-	t_token	*cur;
+	t_cmd	*cur;
 
 	if (!*head)
 	{
@@ -47,15 +46,31 @@ void	token_add_back(t_token **head, t_token *new)
 	cur->next = new;
 }
 
-void	free_tokens(t_token *head)
+void	cmd_free(t_cmd *cmd)
 {
-	t_token	*next;
+	int	i;
+
+	if (!cmd)
+		return ;
+	i = 0;
+	while (cmd->argv && cmd->argv[i])
+	{
+		free(cmd->argv[i]);
+		i++;
+	}
+	free(cmd->argv);
+	redir_clear(cmd->redirs);
+	free(cmd);
+}
+
+void	cmd_clear(t_cmd *head)
+{
+	t_cmd	*next;
 
 	while (head)
 	{
 		next = head->next;
-		free(head->value);
-		free(head);
+		cmd_free(head);
 		head = next;
 	}
 }

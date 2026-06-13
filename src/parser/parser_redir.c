@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   parser_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/31 00:00:00 by wini              #+#    #+#             */
-/*   Updated: 2026/05/31 00:00:00 by wini             ###   ########.fr       */
+/*   Created: 2026/06/09 00:00:00 by wini              #+#    #+#             */
+/*   Updated: 2026/06/09 00:00:00 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
-t_token	*token_new(t_token_type type, char *value)
+void	redir_add_back(t_redir **head, t_redir *new)
 {
-	t_token	*token;
-
-	if (!value)
-		return (NULL);
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->type = type;
-	token->value = ft_strdup(value);
-	if (!token->value)
-	{
-		free(token);
-		return (NULL);
-	}
-	token->next = NULL;
-	return (token);
-}
-
-void	token_add_back(t_token **head, t_token *new)
-{
-	t_token	*cur;
+	t_redir	*cur;
 
 	if (!*head)
 	{
@@ -47,14 +27,36 @@ void	token_add_back(t_token **head, t_token *new)
 	cur->next = new;
 }
 
-void	free_tokens(t_token *head)
+int	add_redir(t_cmd *cmd, t_token_type type, char *target)
 {
-	t_token	*next;
+	t_redir	*redir;
+
+	redir = malloc(sizeof(t_redir));
+	if (!redir)
+		return (0);
+	redir->type = type;
+	redir->target = ft_strdup(target);
+	if (!redir->target)
+	{
+		free(redir);
+		return (0);
+	}
+	redir->fd = -1;
+	redir->next = NULL;
+	redir_add_back(&cmd->redirs, redir);
+	return (1);
+}
+
+void	redir_clear(t_redir *head)
+{
+	t_redir	*next;
 
 	while (head)
 	{
 		next = head->next;
-		free(head->value);
+		if (head->fd >= 0)
+			close(head->fd);
+		free(head->target);
 		free(head);
 		head = next;
 	}
