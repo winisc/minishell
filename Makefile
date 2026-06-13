@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+         #
+#    By: wini <wini@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/07 19:14:29 by wini              #+#    #+#              #
-#    Updated: 2026/04/18 20:19:02 by wsilveir         ###   ########.fr        #
+#    Updated: 2026/06/08 23:51:15 by wini             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,24 +14,57 @@ NAME = minishell
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -lreadline
 
 SRC_DIR = src
 LIBFT_DIR = libs/libft
-FT_PRINTF_DIR = libs/ft_printf
 
-INCLUDES = -Iincludes -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR)
+INCLUDES = -Iincludes -I$(LIBFT_DIR)
 
-SRC = $(SRC_DIR)/main.c
+SRC = $(SRC_DIR)/main.c \
+		$(SRC_DIR)/process_input.c \
+		$(SRC_DIR)/signals/treatment_signals.c \
+		$(SRC_DIR)/lexer/token.c \
+		$(SRC_DIR)/lexer/lexer_utils.c \
+		$(SRC_DIR)/lexer/lexer.c \
+		$(SRC_DIR)/env/env_init.c \
+		$(SRC_DIR)/env/env_utils.c \
+		$(SRC_DIR)/parser/parser.c \
+		$(SRC_DIR)/parser/parser_syntax.c \
+		$(SRC_DIR)/parser/parser_utils.c \
+		$(SRC_DIR)/parser/parser_redir.c \
+		$(SRC_DIR)/expansion/expand.c \
+		$(SRC_DIR)/expansion/expand_quote.c \
+		$(SRC_DIR)/expansion/expand_dollar.c \
+		$(SRC_DIR)/expansion/expand_utils.c \
+		$(SRC_DIR)/expansion/expand_split.c \
+		$(SRC_DIR)/expansion/expand_fields.c \
+		$(SRC_DIR)/env/env_array.c \
+		$(SRC_DIR)/env/env_modify.c \
+		$(SRC_DIR)/utils/utils.c \
+		$(SRC_DIR)/execution/path.c \
+		$(SRC_DIR)/execution/exec.c \
+		$(SRC_DIR)/execution/exec_child.c \
+		$(SRC_DIR)/execution/exec_utils.c \
+		$(SRC_DIR)/redirections/redir.c \
+		$(SRC_DIR)/redirections/heredoc.c \
+		$(SRC_DIR)/redirections/heredoc_utils.c \
+		$(SRC_DIR)/builtins/echo.c \
+		$(SRC_DIR)/builtins/pwd_env.c \
+		$(SRC_DIR)/builtins/cd.c \
+		$(SRC_DIR)/builtins/export.c \
+		$(SRC_DIR)/builtins/unset.c \
+		$(SRC_DIR)/builtins/exit.c \
+		$(SRC_DIR)/builtins/builtin_dispatch.c
 
 OBJ = $(SRC:.c=.o)
 
 LIBFT_A = $(LIBFT_DIR)/libft.a
-FT_PRINTF_A = $(FT_PRINTF_DIR)/libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_A) $(FT_PRINTF_A)
-	$(CC) $(CFLAGS) $(OBJ) $(INCLUDES) $(LIBFT_A) $(FT_PRINTF_A) -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT_A)
+	$(CC) $(CFLAGS) $(OBJ) $(INCLUDES) $(LIBFT_A) $(LDFLAGS) -o $(NAME)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -39,18 +72,13 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBFT_A):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-$(FT_PRINTF_A):
-	@$(MAKE) -C $(FT_PRINTF_DIR)
-
 clean:
 	rm -f $(OBJ)
 	@$(MAKE) clean -C $(LIBFT_DIR)
-	@$(MAKE) clean -C $(FT_PRINTF_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
-	@$(MAKE) fclean -C $(FT_PRINTF_DIR)
 
 re: fclean all
 

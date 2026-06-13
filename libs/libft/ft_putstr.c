@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 16:36:02 by wsilveir          #+#    #+#             */
-/*   Updated: 2025/07/26 20:43:41 by wsilveir         ###   ########.fr       */
+/*   Created: 2025/07/19 12:38:33 by wsilveir          #+#    #+#             */
+/*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_putstr(char *s)
 {
-	size_t	i;
+	int	i;
 
+	if (!s)
+		return (ft_putstr("(null)"));
 	i = 0;
 	while (s[i])
-	{
-		if (s[i] == (char) c)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == (char) c)
-		return ((char *)s + i);
-	return (NULL);
+		write(1, &s[i++], 1);
+	return (i);
 }

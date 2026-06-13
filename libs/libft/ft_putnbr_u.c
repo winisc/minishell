@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 18:45:30 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/18 20:09:41 by wsilveir         ###   ########.fr       */
+/*   Created: 2025/07/28 14:56:49 by wsilveir          #+#    #+#             */
+/*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr_hex(unsigned int nbr, int to)
+int	ft_putnbr_u(unsigned int nbr)
 {
-	char	*base;
+	char	*str;
 	int		res;
 
-	if (to)
-		base = "0123456789ABCDEF";
-	else
-		base = "0123456789abcdef";
-	res = 0;
-	if (nbr >= 16)
-		res += ft_putnbr_hex(nbr / 16, to);
-	res += ft_putchar(base[nbr % 16]);
+	str = ft_utoa(nbr);
+	res = ft_putstr(str);
+	free(str);
 	return (res);
 }

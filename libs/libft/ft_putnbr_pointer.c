@@ -1,54 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_pointer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 10:43:59 by wsilveir          #+#    #+#             */
+/*   Created: 2025/07/26 18:45:30 by wsilveir          #+#    #+#             */
 /*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	length(int num)
+int	ft_putnbr_pointer(size_t nbr)
 {
-	int	i;
+	char	*base;
+	int		res;
 
-	i = 0;
-	if (num <= 0)
-		i++;
-	while (num != 0)
+	base = "0123456789abcdef";
+	res = 0;
+	if (!nbr)
+		return (ft_putstr("(nil)"));
+	if (nbr >= 16)
 	{
-		num = num / 10;
-		i++;
+		res += ft_putnbr_pointer(nbr / 16);
+		res += ft_putnbr_pointer(nbr % 16);
 	}
-	return (i);
-}
-
-char	*ft_itoa(int n)
-{
-	int		ne;
-	int		len;
-	int		num;
-	char	*str;
-
-	len = length(n);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (0);
-	str[len] = 0;
-	ne = (n < 0);
-	while (len > 0)
+	else
 	{
-		num = n % 10;
-		if (ne)
-			num = -num;
-		str[--len] = num + '0';
-		n = n / 10;
+		res += ft_putstr("0x");
+		res += ft_putchar(base[nbr]);
 	}
-	if (ne)
-		str[0] = '-';
-	return (str);
+	return (res);
 }

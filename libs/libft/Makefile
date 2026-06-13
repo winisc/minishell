@@ -6,7 +6,7 @@
 #    By: wini <wini@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 13:00:48 by wsilveir          #+#    #+#              #
-#    Updated: 2025/12/20 21:43:29 by wini             ###   ########.fr        #
+#    Updated: 2026/04/22 12:10:33 by wini             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	   ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_itoa.c get_next_line.c \
 	   ft_double_free.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 	   ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c \
-	   ft_lstiter_bonus.c ft_lstmap_bonus.c ft_long_atoi.c
+	   ft_lstiter_bonus.c ft_lstmap_bonus.c ft_long_atoi.c \
+	   ft_printf.c ft_putchar.c ft_putnbr_pointer.c ft_putnbr_hex.c ft_putnbr_u.c ft_putnbr.c \
+	   ft_putstr.c ft_strchr.c ft_strlen.c ft_itoa.c ft_utoa.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   pwd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 16:36:02 by wsilveir          #+#    #+#             */
-/*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
+/*   Created: 2026/06/09 00:00:00 by wini              #+#    #+#             */
+/*   Updated: 2026/06/09 00:00:00 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execution.h"
 
-char	*ft_strchr(const char *s, int c)
+int	builtin_pwd(void)
 {
-	size_t	i;
+	char	*cwd;
 
-	i = 0;
-	while (s[i])
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
 	{
-		if (s[i] == (char) c)
-			return ((char *)s + i);
-		i++;
+		error_msg("pwd", NULL, strerror(errno));
+		return (1);
 	}
-	if (s[i] == (char) c)
-		return ((char *)s + i);
-	return (NULL);
+	ft_putendl_fd(cwd, 1);
+	free(cwd);
+	return (0);
+}
+
+int	builtin_env(t_env *env)
+{
+	while (env)
+	{
+		if (env->value)
+		{
+			ft_putstr_fd(env->key, 1);
+			ft_putchar_fd('=', 1);
+			ft_putendl_fd(env->value, 1);
+		}
+		env = env->next;
+	}
+	return (0);
 }

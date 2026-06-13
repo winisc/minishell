@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 12:38:33 by wsilveir          #+#    #+#             */
-/*   Updated: 2025/07/28 16:10:10 by wsilveir         ###   ########.fr       */
+/*   Created: 2025/07/28 14:56:49 by wsilveir          #+#    #+#             */
+/*   Updated: 2026/04/23 19:22:16 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putstr(char *s)
+int	ft_putnbr(size_t nbr)
 {
-	int	i;
+	char	*str;
+	int		res;
 
-	if (!s)
-		return (ft_putstr("(null)"));
-	i = 0;
-	while (s[i])
-		write(1, &s[i++], 1);
-	return (i);
+	str = ft_itoa(nbr);
+	res = ft_putstr(str);
+	free(str);
+	return (res);
 }

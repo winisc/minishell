@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wsilveir <wsilveir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wini <wini@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 14:56:49 by wsilveir          #+#    #+#             */
-/*   Updated: 2025/07/28 16:49:39 by wsilveir         ###   ########.fr       */
+/*   Created: 2026/06/09 00:00:00 by wini              #+#    #+#             */
+/*   Updated: 2026/06/09 00:00:00 by wini             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "execution.h"
 
-int	ft_putnbr(size_t nbr)
+int	builtin_unset(char **argv, t_shell *shell)
 {
-	char	*str;
-	int		res;
+	int	i;
 
-	str = ft_itoa(nbr);
-	res = ft_putstr(str);
-	free(str);
-	return (res);
+	i = 1;
+	while (argv[i])
+	{
+		env_unset(&shell->env, argv[i]);
+		i++;
+	}
+	return (0);
 }
