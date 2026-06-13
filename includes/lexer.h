@@ -44,6 +44,7 @@ void	free_tokens(t_token *head);
 int		is_whitespace(char c);
 int		is_operator(char c);
 int		is_quote(char c);
+int		has_unclosed_quotes(char *input);
 
 t_token	*lexer(char *input);
 
