@@ -32,29 +32,19 @@ static int	heredoc_wait(t_redir *r, int *pipefd, pid_t pid, t_shell *shell)
 static int	read_heredoc(t_redir *r, t_cmd *head, t_shell *shell)
 {
 	int		pipefd[2];
-	char	*delim;
 	pid_t	pid;
 
 	if (pipe(pipefd) < 0)
 		return (0);
-	delim = strip_quotes(r->target);
-	if (!delim)
-	{
-		close(pipefd[0]);
-		close(pipefd[1]);
-		return (0);
-	}
 	pid = fork();
 	if (pid < 0)
 	{
-		free(delim);
 		close(pipefd[0]);
 		close(pipefd[1]);
 		return (0);
 	}
 	if (pid == 0)
-		heredoc_child(pipefd, delim, head, shell);
-	free(delim);
+		heredoc_child(pipefd, r->target, head, shell);
 	return (heredoc_wait(r, pipefd, pid, shell));
 }
 
